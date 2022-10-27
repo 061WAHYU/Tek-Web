@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Latihan Javascript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container ">
+    <div class="content">
+        <div class="col-lg-8 bg-info">
+            <h2>Menghitung MOD, Jarak, Waktu, dan Kecepatan</h2>
+            <hr>
+            <form action=" formulir.php" method="post" onSubmit="return ValidasiForm()" name="FormReg">
+                <table>
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td><input type="text" name="nama" value="" placeholder="Tulisakan Nama Anda" />
+                        <br/>
+                            <small style="color: red" id="err_nama"></small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>NIM</td>
+                        <td>:</td>
+                        <td> <input type="text" name="nim" placeholder="Tulisakan NIM Anda" /><br/>
+                            <small style="color: red" id="err_nim"></small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pilih menu</td>
+                        <td>:</td>
+                        <td>
+                            <input type="radio" name="bangun" value="MOD" onclick="MOD()" checked /> MOD
+                            <input type="radio" name="bangun" value="jarak" onclick="Jarak()" /> Jarak
+                            <input type="radio" name="bangun" value="kecepatan" onclick="Kecepatan()" /> Kecepatan
+                            <input type="radio" name="bangun" value="waktu" onclick="Waktu()" /> Waktu
+                            <br/>
+                            <small style="color: red" id="err_jenis_kelamin"></small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Menghitung</td>
+                        <td>:</td>
+                        <td id="cek">MOD</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><br></td>
+                    </tr>
+                    <tr>
+                        <td id="par1">Bilangan ke-1</td>
+                        <td>:</td>
+                        <td><input type="number" name="par1" value="" onkeyup="hitung()" placeholder="Masukkan Angka" /></td>
+                    </tr>
+                    <tr>
+                        <td id="par2">Bilangan ke-2</td>
+                        <td>:</td>
+                        <td><input type="number" name="par2" value="" onkeyup="hitung()" placeholder="Masukkan Angka" /></td>
+                    </tr>
+                    <tr>
+                        <td>Hasil</td>
+                        <td>:</td>
+                        <td><input type="number" name="hasil" value="" readonly /><br/>
+                        <small style="color: red" id="err_hasil"></small></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><hr/> </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-lg-4 " style="background-color: aliceblue ">
+        </div>
+    </div>
+ </div>
+</body>
+<script type="text/javascript">
+    function ValidasiForm() {
+     if (document.FormReg.nama.value == "") {
+         $("#err_nama").html("Nama Harus Diisi");
+         return false;
+     } else {
+         $("#err_nama").html("");
+     }
+     if (document.FormReg.nim.value == "") {
+         $("#err_nim").html("Nim Harus Diisi");
+         return false;
+     } else {
+         $("#err_nim").html("");
+     }
+     if (document.FormReg.hasil.value == "") {
+         $("#err_hasil").html("Silakan Isikan Parameter");
+     return false;
+     } else {
+         $("#err_hasil").html("");
+     }
+     }
+     function MOD() {
+         $("#cek").html("MOD");
+         $("#par1").html("Bilangan ke-1");
+         $("#par2").html("Bilangan ke-2");
+         hitung();
+     }
+     function Jarak() {
+         $("#cek").html("Jarak");
+         $("#par1").html("Kecepatan(v)");
+         $("#par2").html("Waktu(t)");
+         hitung();
+     }
+     function Kecepatan() {
+         $("#cek").html("Kecepatan");
+         $("#par1").html("Jarak(s)");
+         $("#par2").html("Waktu(t)");
+         hitung();
+     }
+     function Waktu() {
+         $("#cek").html("Waktu");
+         $("#par1").html("Jarak(s)");
+         $("#par2").html("Kecepatan(v)");
+         hitung();
+     }
+     function hitung() {
+        var hasil = 0;
+        var par1 = parseFloat($("input[name='par1']").val())
+        var par1 = parseFloat($("input[name='par2']").val())
+        switch (document.FormReg.bangun.value) {
+            case "MOD":
+                hasil = par1 % par2;
+                break;
+            case "jarak":
+                hasil = par1 * par2;
+                break;
+            case "kecepatan":
+                hasil = par1 / par2;
+                break;
+            case "waktu":
+                hasil = par1 / par2;
+            break;
+         }
+        $("input[name='hasil']").val(hasil);
+}
+</script>
+</html>
